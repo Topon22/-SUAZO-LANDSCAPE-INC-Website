@@ -18,7 +18,7 @@ const wordVariants = {
     transition: {
       delay: 0.5 + i * 0.12,
       duration: 0.6,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   }),
 };
