@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Star, ChevronDown } from "lucide-react";
+import { ArrowRight, Star, ChevronDown, Shield, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMPANY_INFO } from "./data";
 
@@ -106,17 +106,35 @@ export default function Hero({ onNavigate }: HeroProps) {
           ))}
         </h1>
 
-        {/* Subtitle */}
+        {/* Subtitle with owner mention */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.6 }}
-          className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg sm:text-xl text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed"
         >
-          Anaheim&apos;s trusted landscaping professionals. From lawn care to
+          Anaheim&apos;s trusted landscaping professionals led by{" "}
+          <strong className="text-amber-300">Jorge Luis Suazo</strong>. From lawn care to
           complete outdoor transformations, we bring your vision to life with
           expert craftsmanship and personalized service.
         </motion.p>
+
+        {/* Licensed & Insured + Hours badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.35, duration: 0.6 }}
+          className="flex items-center justify-center gap-3 mb-8 flex-wrap"
+        >
+          <span className="inline-flex items-center gap-1.5 bg-amber-400/20 text-amber-200 rounded-full px-3 py-1.5 text-sm font-medium border border-amber-400/30">
+            <Shield className="h-4 w-4" />
+            Licensed & Insured
+          </span>
+          <span className="inline-flex items-center gap-1.5 bg-white/10 text-white/80 rounded-full px-3 py-1.5 text-sm font-medium border border-white/20">
+            <Clock className="h-4 w-4" />
+            Mon–Sat 7AM–4PM
+          </span>
+        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div

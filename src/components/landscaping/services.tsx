@@ -9,10 +9,15 @@ import {
   TreePine,
   Droplets,
   Flower2,
+  Layers,
+  Grid3X3,
+  Leaf,
   ArrowRight,
+  Shield,
+  Clock,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { SERVICES, type ServiceData } from "./data";
+import { SERVICES, COMPANY_INFO, type ServiceData } from "./data";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Sprout,
@@ -21,6 +26,9 @@ const ICON_MAP: Record<string, React.ElementType> = {
   TreePine,
   Droplets,
   Flower2,
+  Layers,
+  Grid3X3,
+  Leaf,
 };
 
 interface ServicesProps {
@@ -45,33 +53,33 @@ function ServiceCard({
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
+      transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
     >
       <Card
         onClick={() => onServiceClick(service.slug)}
         className="group cursor-pointer border-0 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden bg-card hover:-translate-y-2"
       >
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-44 overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
             style={{ backgroundImage: `url('${service.image}')` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
-          <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+          <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
             <div className="bg-amber-400/90 backdrop-blur-sm rounded-xl p-2.5">
-              <Icon className="h-6 w-6 text-forest-dark" />
+              <Icon className="h-5 w-5 text-forest-dark" />
             </div>
           </div>
         </div>
-        <CardContent className="p-5">
-          <h3 className="text-lg font-bold text-forest mb-2 group-hover:text-forest-light transition-colors">
+        <CardContent className="p-4">
+          <h3 className="text-base font-bold text-forest mb-1.5 group-hover:text-forest-light transition-colors">
             {service.title}
           </h3>
-          <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+          <p className="text-muted-foreground text-sm leading-relaxed mb-3 line-clamp-2">
             {service.description}
           </p>
           <div className="flex items-center text-amber-600 font-medium text-sm group-hover:text-amber-500 transition-colors">
-            Learn More
+            Click for details
             <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </div>
         </CardContent>
@@ -106,10 +114,21 @@ export default function Services({ onServiceClick }: ServicesProps) {
             we offer comprehensive solutions for every outdoor need in Anaheim
             and Orange County.
           </p>
+          {/* Licensed badge row */}
+          <div className="flex items-center justify-center gap-4 mt-6 flex-wrap">
+            <span className="inline-flex items-center gap-1.5 bg-forest/10 text-forest rounded-full px-3 py-1.5 text-sm font-medium">
+              <Shield className="h-4 w-4" />
+              Licensed & Insured
+            </span>
+            <span className="inline-flex items-center gap-1.5 bg-forest/10 text-forest rounded-full px-3 py-1.5 text-sm font-medium">
+              <Clock className="h-4 w-4" />
+              Mon–Sat 7AM–4PM
+            </span>
+          </div>
         </motion.div>
 
-        {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Service Cards Grid - 4 columns on xl for 8 services */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
           {SERVICES.map((service, i) => (
             <ServiceCard
               key={service.slug}

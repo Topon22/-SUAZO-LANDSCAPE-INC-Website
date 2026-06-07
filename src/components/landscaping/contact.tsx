@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   MapPin,
@@ -9,12 +9,70 @@ import {
   Clock,
   Send,
   CheckCircle,
+  CircleDot,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { COMPANY_INFO } from "./data";
+import { COMPANY_INFO, BUSINESS_HOURS } from "./data";
+
+function OpenNowIndicator() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState("");
+
+  useEffect(() => {
+    const updateStatus = () => {
+      const now = new Date();
+      const pacificNow = new Date(
+        now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" })
+      );
+      const day = pacificNow.getDay(); // 0=Sun
+      const hours = pacificNow.getHours();
+      const minutes = pacificNow.getMinutes();
+      const currentMinutes = hours * 60 + minutes;
+
+      setCurrentTime(
+        pacificNow.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          timeZone: "America/Los_Angeles",
+        })
+      );
+
+      // Sunday = closed, Mon-Sat 7AM-4PM
+      if (day === 0) {
+        setIsOpen(false);
+      } else {
+        const openMinutes = 7 * 60; // 7:00 AM
+        const closeMinutes = 16 * 60; // 4:00 PM
+        setIsOpen(currentMinutes >= openMinutes && currentMinutes < closeMinutes);
+      }
+    };
+
+    updateStatus();
+    const timer = setInterval(updateStatus, 60000); // Update every minute
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex items-center gap-2">
+      <CircleDot
+        className={`h-3 w-3 ${isOpen ? "text-green-500 fill-green-500" : "text-red-500 fill-red-500"} animate-pulse`}
+      />
+      <span
+        className={`text-sm font-semibold ${isOpen ? "text-green-600" : "text-red-600"}`}
+      >
+        {isOpen ? "Open Now" : "Closed"}
+      </span>
+      {currentTime && (
+        <span className="text-muted-foreground text-xs ml-1">
+          ({currentTime} PT)
+        </span>
+      )}
+    </div>
+  );
+}
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
@@ -77,13 +135,8 @@ export default function Contact() {
     {
       icon: Mail,
       label: "Email",
-      value: "info@suazolandscape.com",
-      href: "mailto:info@suazolandscape.com",
-    },
-    {
-      icon: Clock,
-      label: "Business Hours",
-      value: "Mon–Sat: 7:00 AM – 6:00 PM",
+      value: COMPANY_INFO.email,
+      href: `mailto:${COMPANY_INFO.email}`,
     },
   ];
 
@@ -117,7 +170,7 @@ export default function Contact() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="space-y-6 mb-8">
+            <div className="space-y-4 mb-6">
               {CONTACT_INFO.map((item) => {
                 const Icon = item.icon;
                 const content = (
@@ -150,17 +203,45 @@ export default function Contact() {
               })}
             </div>
 
-            {/* Map Placeholder */}
-            <div className="rounded-2xl overflow-hidden shadow-md h-64 bg-white">
+            {/* Business Hours Card */}
+            <div className="bg-white rounded-xl shadow-sm p-5 mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-forest" />
+                  <h4 className="text-forest font-bold">Business Hours</h4>
+                </div>
+                <OpenNowIndicator />
+              </div>
+              <div className="space-y-2">
+                {BUSINESS_HOURS.map((bh) => (
+                  <div
+                    key={bh.day}
+                    className={`flex items-center justify-between text-sm py-1 ${
+                      bh.day ===
+                      new Date().toLocaleString("en-US", {
+                        weekday: "long",
+                        timeZone: "America/Los_Angeles",
+                      })
+                        ? "font-semibold text-forest"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    <span>{bh.day}</span>
+                    <span>
+                      {bh.closed ? (
+                        <span className="text-red-500">Closed</span>
+                      ) : (
+                        `${bh.open} – ${bh.close}`
+                      )}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Map */}
+            <div className="rounded-2xl overflow-hidden shadow-md h-48 bg-white">
               <div className="w-full h-full bg-muted flex items-center justify-center relative">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: `url('https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/-117.9142,33.8366,13,0/800x400@2x?access_token=pk.placeholder')`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                />
                 <div className="relative z-10 text-center">
                   <MapPin className="h-10 w-10 text-forest mx-auto mb-2" />
                   <p className="text-forest font-bold">
@@ -169,6 +250,14 @@ export default function Contact() {
                   <p className="text-muted-foreground text-sm">
                     749 N Vine St, Anaheim
                   </p>
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(COMPANY_INFO.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-600 text-xs font-medium hover:underline mt-1 inline-block"
+                  >
+                    Open in Google Maps →
+                  </a>
                 </div>
               </div>
             </div>

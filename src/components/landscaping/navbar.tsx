@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, TreePine, Phone } from "lucide-react";
+import { motion } from "framer-motion";
+import { Menu, TreePine, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { COMPANY_INFO } from "./data";
@@ -18,6 +18,7 @@ const NAV_LINKS = [
   { label: "About", section: "about" },
   { label: "Gallery", section: "gallery" },
   { label: "Testimonials", section: "testimonials" },
+  { label: "FAQ", section: "faq" },
   { label: "Contact", section: "contact" },
 ];
 
@@ -68,40 +69,24 @@ export default function Navbar({ onNavigate, currentView }: NavbarProps) {
             }}
             className="flex items-center gap-2 group cursor-pointer"
           >
-            <TreePine
-              className={`h-8 w-8 transition-colors duration-300 ${
-                scrolled ? "text-amber-400" : "text-amber-400"
-              }`}
-            />
+            <TreePine className="h-8 w-8 text-amber-400" />
             <div className="flex flex-col">
-              <span
-                className={`text-lg font-bold tracking-wide leading-tight transition-colors duration-300 ${
-                  scrolled ? "text-white" : "text-white"
-                }`}
-              >
+              <span className="text-lg font-bold tracking-wide leading-tight text-white">
                 SUAZO
               </span>
-              <span
-                className={`text-[10px] tracking-[0.2em] uppercase leading-tight transition-colors duration-300 ${
-                  scrolled ? "text-amber-300" : "text-amber-300"
-                }`}
-              >
+              <span className="text-[10px] tracking-[0.2em] uppercase leading-tight text-amber-300">
                 Landscape Inc
               </span>
             </div>
           </button>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.section}
                 onClick={() => handleNavClick(link.section)}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 cursor-pointer ${
-                  scrolled
-                    ? "text-white/80 hover:text-white hover:bg-white/10"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
+                className="px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 cursor-pointer text-white/80 hover:text-white hover:bg-white/10"
               >
                 {link.label}
               </button>
@@ -130,7 +115,7 @@ export default function Navbar({ onNavigate, currentView }: NavbarProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="md:hidden text-white hover:bg-white/10"
+                  className="lg:hidden text-white hover:bg-white/10"
                 >
                   <Menu className="h-6 w-6" />
                 </Button>

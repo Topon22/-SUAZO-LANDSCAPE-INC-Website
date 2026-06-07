@@ -39,9 +39,9 @@ export default function CTASection() {
             Ready to Transform Your Outdoor Space?
           </h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto mb-8">
-            Get a free, no-obligation estimate for your landscaping project. Our team is
-            ready to bring your vision to life with professional craftsmanship and
-            personalized service.
+            Get a free, no-obligation estimate for your landscaping project. Contact{" "}
+            <strong className="text-amber-300">Jorge Suazo</strong> today and let our
+            team bring your vision to life.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

@@ -6,12 +6,15 @@ import Navbar from "@/components/landscaping/navbar";
 import Hero from "@/components/landscaping/hero";
 import Services from "@/components/landscaping/services";
 import About from "@/components/landscaping/about";
+import Process from "@/components/landscaping/process";
 import Gallery from "@/components/landscaping/gallery";
 import Testimonials from "@/components/landscaping/testimonials";
+import FAQ from "@/components/landscaping/faq";
 import CTASection from "@/components/landscaping/cta-section";
 import Contact from "@/components/landscaping/contact";
 import Footer from "@/components/landscaping/footer";
 import ServiceDetail from "@/components/landscaping/service-detail";
+import FloatingActions from "@/components/landscaping/floating-actions";
 
 type View = "home" | "service";
 
@@ -91,8 +94,10 @@ export default function Home() {
             <Hero onNavigate={handleNavNavigate} />
             <Services onServiceClick={navigateToService} />
             <About />
+            <Process />
             <Gallery />
             <Testimonials />
+            <FAQ />
             <CTASection />
             <Contact />
           </motion.div>
@@ -114,6 +119,7 @@ export default function Home() {
       </AnimatePresence>
 
       <Footer />
+      <FloatingActions />
     </div>
   );
 }

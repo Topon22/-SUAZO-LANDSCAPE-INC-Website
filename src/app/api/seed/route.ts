@@ -3,67 +3,97 @@ import { db } from "@/lib/db";
 
 const sampleReviews = [
   {
-    name: "Maria Gonzalez",
+    name: "Verified Customer",
     rating: 5,
     comment:
-      "SUAZO LANDSCAPE completely transformed our backyard! They designed and installed a beautiful patio with a fire pit area, and the attention to detail was incredible. The team was professional, on time, and left everything spotless. Highly recommend!",
-    service: "Patio & Hardscape Installation",
+      "Suazo Landscape did an AMAZING job! We are very happy with the outcome. Jorge was very communicative, gave great pricing and did exactly what he said he would do.",
+    service: "Landscape Design & Installation",
     approved: true,
   },
   {
-    name: "Robert Chen",
+    name: "Joe",
     rating: 5,
-    comment:
-      "We've been using SUAZO for our lawn maintenance for over a year now and our yard has never looked better. Their crew is always punctual, thorough, and friendly. The weekly service keeps everything pristine.",
+    comment: "Great work, on time, fair price. Does what he said he would do!",
     service: "Lawn Maintenance",
     approved: true,
   },
   {
-    name: "Sarah Thompson",
-    rating: 4,
-    comment:
-      "The irrigation system they installed has saved us so much on our water bill. The team was knowledgeable and helped us choose the right system for our property size. Great work overall!",
-    service: "Irrigation System Installation",
-    approved: true,
-  },
-  {
-    name: "James Okafor",
+    name: "Ken Z",
     rating: 5,
     comment:
-      "Absolutely stunning landscape design! They took our vague ideas and turned them into a gorgeous outdoor living space. The stone walkways and garden beds are exactly what we envisioned. Worth every penny.",
-    service: "Landscape Design",
+      "Showed up on time. Good work. Communication was clear. Would use Luis and his company again.",
+    service: "Hardscaping",
     approved: true,
   },
   {
-    name: "Linda Martinez",
+    name: "Verified Customer",
+    rating: 5,
+    comment: "Great work..good suggestions.",
+    service: "Garden Design",
+    approved: true,
+  },
+  {
+    name: "Maria R.",
     rating: 5,
     comment:
-      "After the big storm, our trees were a mess. SUAZO came out the same day we called and handled all the tree removal and cleanup. Fast, efficient, and very reasonably priced. We couldn't be happier!",
-    service: "Tree Removal & Cleanup",
+      "Jorge and his team did an incredible job with our yard cleanup. The property looked completely transformed. They removed years of overgrowth and left everything spotless. Very professional!",
+    service: "Seasonal Cleanup",
     approved: true,
   },
   {
-    name: "David Park",
-    rating: 4,
-    comment:
-      "We hired SUAZO to install outdoor lighting around our property and the results are beautiful. Our home looks amazing at night and we feel much safer with the added visibility. Professional team from start to finish.",
-    service: "Outdoor Lighting",
-    approved: true,
-  },
-  {
-    name: "Amanda Rivera",
+    name: "David L.",
     rating: 5,
     comment:
-      "The retaining wall they built for our sloped yard is not only functional but gorgeous. They used natural stone that complements our home perfectly. The drainage solution they included was a great bonus.",
-    service: "Retaining Wall Construction",
+      "We had fescue sod installed in our entire backyard and it looks amazing. Jorge also set up a new sprinkler system to keep it green. Best investment we've made for our home in Anaheim!",
+    service: "Sod Installation",
     approved: true,
   },
   {
-    name: "Michael Brooks",
+    name: "Susan M.",
     rating: 5,
     comment:
-      "From the initial consultation to the final walkthrough, SUAZO exceeded our expectations. They redesigned our entire front yard with drought-tolerant plants and it looks amazing while saving water. Top-notch service!",
-    service: "Landscape Design",
+      "Our sprinkler system was leaking and wasting water. Suazo Landscape came out the same week, diagnosed the problem, and had it fixed in no time. Very fair pricing and honest work.",
+    service: "Sprinkler Installation",
+    approved: true,
+  },
+  {
+    name: "Robert T.",
+    rating: 5,
+    comment:
+      "Had several large trees trimmed and one dead tree removed. The crew was careful around our fence and cleaned up every branch. Jorge is a true professional. Highly recommend for tree work!",
+    service: "Tree Trimming & Removal",
+    approved: true,
+  },
+  {
+    name: "Jennifer K.",
+    rating: 5,
+    comment:
+      "Jorge installed a beautiful paver patio in our backyard. The quality of work is outstanding and he finished ahead of schedule. We've already recommended him to our neighbors in Fullerton!",
+    service: "Hardscaping",
+    approved: true,
+  },
+  {
+    name: "Carlos H.",
+    rating: 5,
+    comment:
+      "We wanted drought-tolerant landscaping for our front yard and Jorge designed exactly what we needed. Beautiful succulents and native plants that require almost no water. Love it!",
+    service: "Garden Design",
+    approved: true,
+  },
+  {
+    name: "Patricia W.",
+    rating: 5,
+    comment:
+      "Professional, reliable, and affordable. Jorge and his crew maintain our lawn every week and it always looks perfect. They show up on time and do quality work. A+ service in Orange County!",
+    service: "Lawn Maintenance",
+    approved: true,
+  },
+  {
+    name: "Mike A.",
+    rating: 5,
+    comment:
+      "Suazo Landscape installed fresh mulch throughout our garden beds and it looks so clean and polished. They also fixed our drip irrigation while they were here. Great value and great people!",
+    service: "Mulching Services",
     approved: true,
   },
 ];
@@ -72,33 +102,33 @@ const sampleBookings = [
   {
     name: "Jennifer Walsh",
     email: "jennifer.walsh@email.com",
-    phone: "(555) 234-5678",
+    phone: "(714) 234-5678",
     service: "Lawn Maintenance",
     date: "2025-03-15",
     time: "09:00",
-    address: "742 Elm Street, Springfield, IL 62704",
+    address: "742 Elm Street, Anaheim, CA 92805",
     message: "Looking for weekly lawn service starting this spring.",
     status: "confirmed",
   },
   {
     name: "Carlos Mendez",
     email: "carlos.mendez@email.com",
-    phone: "(555) 345-6789",
-    service: "Patio & Hardscape Installation",
+    phone: "(714) 345-6789",
+    service: "Hardscaping",
     date: "2025-03-20",
     time: "10:00",
-    address: "1589 Oak Avenue, Riverside, CA 92501",
+    address: "1589 Oak Avenue, Fullerton, CA 92831",
     message: "Interested in a 20x20 patio with built-in seating.",
     status: "pending",
   },
   {
     name: "Patricia Kim",
     email: "patricia.kim@email.com",
-    phone: "(555) 456-7890",
-    service: "Irrigation System Installation",
+    phone: "(714) 456-7890",
+    service: "Sprinkler Installation",
     date: "2025-03-22",
     time: "08:00",
-    address: "324 Maple Drive, Austin, TX 78701",
+    address: "324 Maple Drive, Orange, CA 92866",
     message: "Need a smart irrigation system for a quarter-acre lot.",
     status: "pending",
   },

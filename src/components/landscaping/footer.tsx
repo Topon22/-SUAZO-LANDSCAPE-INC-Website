@@ -6,11 +6,12 @@ import {
   Mail,
   MapPin,
   Facebook,
-  Instagram,
+  Linkedin,
+  Clock,
   ChevronUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { COMPANY_INFO, SERVICES } from "./data";
+import { COMPANY_INFO, SERVICES, BUSINESS_HOURS } from "./data";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -42,18 +43,22 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="#"
+                href={COMPANY_INFO.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-amber-400 hover:text-forest-dark transition-all"
               >
                 <Facebook className="h-4 w-4" />
               </a>
               <a
-                href="#"
-                aria-label="Instagram"
+                href="https://www.linkedin.com/in/jorge-suazo"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
                 className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-amber-400 hover:text-forest-dark transition-all"
               >
-                <Instagram className="h-4 w-4" />
+                <Linkedin className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -64,7 +69,7 @@ export default function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-2">
-              {["Home", "Services", "About", "Gallery", "Testimonials", "Contact"].map(
+              {["Home", "Services", "About", "Gallery", "Testimonials", "FAQ", "Contact"].map(
                 (link) => (
                   <li key={link}>
                     <a
@@ -121,14 +126,41 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:info@suazolandscape.com"
+                  href={`mailto:${COMPANY_INFO.email}`}
                   className="flex items-center gap-3 text-white/60 hover:text-amber-300 transition-colors text-sm"
                 >
                   <Mail className="h-4 w-4 text-amber-400 shrink-0" />
-                  info@suazolandscape.com
+                  {COMPANY_INFO.email}
                 </a>
               </li>
+              <li className="flex items-start gap-3">
+                <Clock className="h-4 w-4 text-amber-400 mt-0.5 shrink-0" />
+                <div className="text-white/60 text-sm">
+                  <p>Mon–Sat: 7:00 AM – 4:00 PM</p>
+                  <p className="text-red-400/70">Sunday: Closed</p>
+                </div>
+              </li>
             </ul>
+            {/* Review links */}
+            <div className="mt-4 pt-4 border-t border-white/10">
+              <p className="text-white/40 text-xs mb-2">Reviews</p>
+              <a
+                href="https://www.google.com/maps/place/SUAZO+LANDSCAPE+INC"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-300/80 hover:text-amber-300 text-xs transition-colors block mb-1"
+              >
+                Google Reviews ({COMPANY_INFO.reviewCount})
+              </a>
+              <a
+                href={COMPANY_INFO.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-300/80 hover:text-amber-300 text-xs transition-colors block"
+              >
+                Facebook ({COMPANY_INFO.facebookLikes} likes)
+              </a>
+            </div>
           </div>
         </div>
 
@@ -136,7 +168,7 @@ export default function Footer() {
         <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm text-center sm:text-left">
             © {new Date().getFullYear()} {COMPANY_INFO.name}. All rights
-            reserved.
+            reserved. Licensed CA Contractor.
           </p>
           <Button
             variant="ghost"

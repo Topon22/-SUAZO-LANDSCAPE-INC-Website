@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Award, Users, Calendar, ThumbsUp } from "lucide-react";
+import { Award, Users, Calendar, ThumbsUp, Shield, TrendingUp } from "lucide-react";
 import { COMPANY_INFO } from "./data";
 
 function AnimatedCounter({
@@ -105,6 +105,21 @@ export default function About() {
                 <span className="text-sm font-medium">Excellence</span>
               </div>
             </motion.div>
+            {/* BuildZoom badge */}
+            <motion.div
+              animate={{ y: [5, -5, 5] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-4 -left-2 sm:left-4 bg-white text-forest rounded-xl p-3 shadow-lg border border-forest/10"
+            >
+              <div className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-amber-500" />
+                <div>
+                  <span className="text-lg font-bold block leading-tight">93</span>
+                  <span className="text-[10px] text-muted-foreground leading-tight">BuildZoom Score</span>
+                  <span className="text-[9px] text-amber-600 block">Top 27%</span>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Content Side */}
@@ -122,18 +137,32 @@ export default function About() {
             <p className="text-muted-foreground leading-relaxed mb-4">
               Since our founding, <strong className="text-forest">{COMPANY_INFO.name}</strong> has been
               dedicated to transforming outdoor spaces across Anaheim and Orange County.
-              What started as a small, family-owned operation has grown into one of the
+              Under the leadership of owner <strong className="text-forest">{COMPANY_INFO.owner}</strong>,
+              what started as a small, family-owned operation has grown into one of the
               area&apos;s most respected landscaping companies — built on a foundation of
               quality workmanship, honest pricing, and genuine care for our clients.
             </p>
-            <p className="text-muted-foreground leading-relaxed mb-8">
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              As a licensed California landscaping contractor with a BuildZoom score of 93 (top 27%),
+              we hold ourselves to the highest standards of professionalism and quality.
               Our team of skilled professionals brings years of horticultural knowledge
               and design expertise to every project. We understand Southern California&apos;s
               unique climate and soil conditions, allowing us to create landscapes that are
-              not only beautiful but sustainable and water-efficient. From simple lawn
-              maintenance to complete outdoor renovations, we treat every property as if
-              it were our own.
+              not only beautiful but sustainable and water-efficient.
             </p>
+
+            {/* Licensed badge */}
+            <div className="flex items-center gap-3 bg-forest/5 rounded-xl p-4 mb-8">
+              <Shield className="h-6 w-6 text-forest shrink-0" />
+              <div>
+                <p className="text-forest font-semibold text-sm">
+                  {COMPANY_INFO.license}
+                </p>
+                <p className="text-muted-foreground text-xs">
+                  Fully insured • BuildZoom Score 93 • Top 27% of contractors
+                </p>
+              </div>
+            </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

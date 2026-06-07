@@ -11,10 +11,15 @@ import {
   TreePine,
   Droplets,
   Flower2,
+  Layers,
+  Grid3X3,
+  Leaf,
   MapPin,
   Clock,
   Send,
   CheckCircle,
+  Shield,
+  Phone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +35,9 @@ const ICON_MAP: Record<string, React.ElementType> = {
   TreePine,
   Droplets,
   Flower2,
+  Layers,
+  Grid3X3,
+  Leaf,
 };
 
 function BookingForm({ service }: { service: ServiceData }) {
@@ -114,6 +122,25 @@ function BookingForm({ service }: { service: ServiceData }) {
         Book This Service
       </h3>
 
+      {/* Licensed & Hours badges */}
+      <div className="flex flex-col gap-2">
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-forest/5 text-forest rounded-full px-3 py-1.5">
+          <Shield className="h-3 w-3" />
+          Licensed & Insured
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-forest/5 text-forest rounded-full px-3 py-1.5">
+          <Clock className="h-3 w-3" />
+          Mon–Sat 7AM–4PM
+        </span>
+        <a
+          href={`tel:${COMPANY_INFO.phone}`}
+          className="inline-flex items-center gap-1.5 text-xs font-medium bg-amber-50 text-amber-700 rounded-full px-3 py-1.5 hover:bg-amber-100 transition-colors"
+        >
+          <Phone className="h-3 w-3" />
+          Call {COMPANY_INFO.phoneDisplay}
+        </a>
+      </div>
+
       {error && (
         <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm">
           {error}
@@ -194,8 +221,6 @@ function BookingForm({ service }: { service: ServiceData }) {
             <option value="1:00 PM">1:00 PM</option>
             <option value="2:00 PM">2:00 PM</option>
             <option value="3:00 PM">3:00 PM</option>
-            <option value="4:00 PM">4:00 PM</option>
-            <option value="5:00 PM">5:00 PM</option>
           </select>
         </div>
       </div>
@@ -286,6 +311,17 @@ export default function ServiceDetail({
             <p className="text-white/80 text-lg max-w-2xl mx-auto">
               {service.description}
             </p>
+            {/* Licensed badge */}
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-amber-200 rounded-full px-3 py-1.5 text-sm font-medium border border-white/20">
+                <Shield className="h-4 w-4" />
+                Licensed & Insured
+              </span>
+              <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white/80 rounded-full px-3 py-1.5 text-sm font-medium border border-white/20">
+                <Clock className="h-4 w-4" />
+                Mon–Sat 7AM–4PM
+              </span>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -364,8 +400,8 @@ export default function ServiceDetail({
                   </h2>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     We proudly serve {service.title.toLowerCase()} clients throughout
-                    Anaheim, Orange, Fullerton, Garden Grove, Santa Ana, Placentia,
-                    Yorba Linda, Brea, and the greater Orange County area. Not sure if
+                    Anaheim, Orange, Fullerton, Garden Grove, Santa Ana, Costa Mesa,
+                    Placentia, Yorba Linda, Brea, and the greater Orange County area. Not sure if
                     we cover your location? Give us a call — we&apos;re happy to help!
                   </p>
                 </div>
