@@ -1,13 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+// Database module - no longer used for Vercel deployment
+// API routes now use static data and in-memory storage
+// To add a database, configure a Vercel-compatible database like Vercel Postgres
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined
-}
-
-export const db =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    log: ['query'],
-  })
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db
+export const db = null;
